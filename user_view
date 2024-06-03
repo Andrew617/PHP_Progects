@@ -1,0 +1,19 @@
+<!DOCTIPE html>
+<head>
+<h3>Пользователь</h3>
+<meta charset="utf-8">
+<img src="/home/andrew/PHP_Progects/stihi/public/images/2311_mainfoto_03.jpg" align="right">  
+<p>
+<?php include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
+include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi';
+$a = new Controller_user;
+print_r($get[id]);
+$user = $a -> getUserFromId($get[id])?>
+<p> Имя: <?php echo $user[name];?><br><br>
+Фамилия: <?php echo $user[surname];?><br><br>
+Биография:<br> <?php echo $user[biography];?><br><br>
+Профессия: <br><?php echo $user[profession];?><br><br>
+Произведения: <br> <?php $b = new Controller_stihi;
+
+#$get[id]
+
