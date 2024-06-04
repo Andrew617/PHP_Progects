@@ -116,13 +116,3 @@ class Controller_user extends Model_user {
 }
 
 
-$a = new Controller_user;
-#$newUser = array( 'nick' => 'Mikel', 'name' => 'Михаил', 'profession' => 'Поэт', 'biography' => 'Воевал на Кавказе. Пишу стихи, и, реже, прозу.', 'password' => '33W22');
-#$b = $a -> createNewuser($newUser);
-$name = 'Тест';
-$password = '123№456';
-#$id = 25;
-#$b = $a -> getUserFromId($id);
-#print_r($b);
-$c = $a -> entry ($name, $password);
-print_r($c);
