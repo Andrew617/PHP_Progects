@@ -1,6 +1,7 @@
 <?php 
 session_start();
 $post = $_POST;
+print_r($post);
 if (!empty($post[nick]) && !empty($post[password])){
     include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
     $a = new Controller_user;

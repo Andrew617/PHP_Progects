@@ -1,6 +1,6 @@
 <?php
 require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
-require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi';
+require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
 function rout($get, $url)
 {   $users = new Controller_user;
     $getUsers = $users -> getAllusersID();
@@ -33,6 +33,6 @@ function rout($get, $url)
     }
     
     
-    else header("Location: HTTP/1.1 404 Not Found");
+    #else header("Location: HTTP/1.1 404 Not Found");
 }
 

@@ -111,9 +111,10 @@ class Controller_user extends Model_user {
     function entry ($nick, $password) {
         $nickArr = array($nick);
         $a = Model_user::entry_in_page($nickArr);
-        $hash = $a['password'];
-        $veryfe = password_verify($password, $hash);
-        print($veryfe);
+        foreach ($a as $apass){
+            $hash = $apass['password'];
+            $veryfe = password_verify($password, $hash);
+        }
         return $veryfe;    
     }
 
@@ -132,11 +133,6 @@ class Controller_user extends Model_user {
 
 #$a = new Controller_user;
 #$newUser = array( 'nick' => 'Mikel', 'name' => 'Михаил', 'profession' => 'Поэт', 'biography' => 'Воевал на Кавказе. Пишу стихи, и, реже, прозу.', 'password' => '33W22');
-#$b = $a -> createNewuser($newUser);
 #$nick = 'Mikel';
-#$password = '123№456';
-#$id = 25;
-#$b = $a -> getPlaceHoldersString($newUser);
+#$b = $a -> getUserIdFromNick($nick);
 #print_r($b);
-#$c = $a -> entry ($name, $password);
-#print_r($c);
