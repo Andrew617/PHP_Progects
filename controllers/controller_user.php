@@ -113,7 +113,7 @@ class Controller_user extends Model_user {
         $a = Model_user::entry_in_page($nickArr);
         foreach ($a as $apass){
             $hash = $apass['password'];
-            $veryfe = password_verify($password, $hash);
+            $veryfe = password_verify($password, $hash); #возможно есть решение лучше. Но работает
         }
         return $veryfe;    
     }
