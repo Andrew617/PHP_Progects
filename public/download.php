@@ -1,6 +1,6 @@
 <?php 
 session_start();
-include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
+# '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
 $id = $_SESSION['id'];
 $title = $_POST['title'];
 $word = $_POST['word'];

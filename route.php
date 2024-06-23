@@ -12,27 +12,32 @@ function rout($get, $url)
         include_once '/home/andrew/PHP_Progects/stihi/views/Main_view.php';
     }
     
-    else if ($get[controller]=='user' & in_array($get[id], $getUsers)){
+    else if ($get['controller']=='user' & in_array($get['id'], $getUsers)){
         include_once '/home/andrew/PHP_Progects/stihi/views/user_view.php';
     }
-    else if ($get[controller]=='user' & in_array($get[nick], $getUsersNicks)){
+    else if ($get[controller]=='user' & in_array($get['nick'], $getUsersNicks)){
         $id = $users -> getUserIdFromNick($get[nick]);
-        header ("Location: http://stihi?controller=user&id=".$id[id]);
+        header ("Location: http://stihi?controller=user&id=".$id['id']);
     }
     
-    else if($get[controller]=='poem') {
+    else if($get[controller]=='poem' & in_array($get['poem_id'], $allPoems)) {
         include_once '/home/andrew/PHP_Progects/stihi/views/poem_view.php';
     }
     else if ($get[id] == 'new')
     {
         include_once '/home/andrew/PHP_Progects/stihi/views/registration_view.php';
     }
-    else if($get[controller]=='entry' & $get[id]=='key')
+    else if($get[controller]=='entry' & $get['id']=='key')
     {
         include_once '/home/andrew/PHP_Progects/stihi/views/entry_form.html';
     }
     
+    else if ($get[controller]=='poem' & !empty($get['poem_text'])){
+        $id = $poems -> getPoemIdFromPoemText($get['poem_text']);
+        print_r($id);
+        ("Location: http://stihi?controller=poem&poem_id=".$id[0]);
+    }
     
-    #else header("Location: HTTP/1.1 404 Not Found");
+    else header("Location: HTTP/1.1 404 Not Found");
 }
 

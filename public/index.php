@@ -11,7 +11,5 @@ else{
 require_once '/home/andrew/PHP_Progects/stihi/route.php';
 $get = $_GET;
 $url = $_SERVER['REQUEST_URI'];
-echo $get;
 rout($get, $url);
-print($url);
 }?>

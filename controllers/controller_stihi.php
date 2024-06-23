@@ -21,6 +21,7 @@ class Controller_stihi extends Model_stihi {
     {
     $poemIdA = array($poemId);
     $poem = Model_stihi::selectPoemForId($poemIdA);
+    $poem = $this -> createOneArrayByArrays($poem);
     return $poem;
     }
 
@@ -36,7 +37,6 @@ class Controller_stihi extends Model_stihi {
     $nickArr = array($nick);
     $poemsFromUser = Model_stihi::getAllpoemsFromUser($nickArr);
     $AllpoemsFromUser = $this -> createOneArrayByArrays($poemsFromUser);
-    preg_replace ('/,|:|;|\.\$/','%$1%', $AllpoemsFromUser[0]);
     return $AllpoemsFromUser;
     }
 
@@ -46,14 +46,20 @@ class Controller_stihi extends Model_stihi {
     return $allPoems;
     }
 
-    function getPoemIdFromPoemName($poemName)
+    function getPoemIdFromPoemText($poemText)
     {
+    $poemText = $poemText.'%';
     $array = array();
-    $poemNameArr = array($poemName);
-    $arrayPoemId = Model_stihi::getPoemIdFromPoemName($poemNameArr);
+    $poemNameArr = array($poemText);
+    $arrayPoemId = Model_stihi::getPoemIdFromPoemText($poemNameArr);
     $Controller_user = new Controller_user;
     $arrayId = $Controller_user -> createOneArrayByArrays($arrayPoemId);
     return $arrayId;
     }
 
 }
+//$poemText = 'В горах моё сердце';
+//$poemId = '1';
+//$a = new Controller_stihi;
+//$b = $a -> getOnePoem($poemId);
+//print_r($b);

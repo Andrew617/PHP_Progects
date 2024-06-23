@@ -32,18 +32,18 @@ function getAllpoemsFromUser($nick)
     return $allpoems;
     }
 
-function getPoemIdFromPoemName($poemName)
+function getPoemIdFromPoemText($poemText)
     {
-    $sqlCommand = "SELECT poem_id FROM poems WHERE poem_name = ?";
-    $poemId = Model::getResult($sqlCommand, $poemName);
+    $sqlCommand = "SELECT poem_id FROM poems WHERE poem_name LIKE ?";
+    $poemId = Model::getResult($sqlCommand, $poemText);
     return $poemId;
     }
 
 }
-
+#$poemText = array('В горах моё сердце%');
 #$a = new Model_stihi;
 #$b = $a -> getAllpoemsId();
 #print_r($b);
 #$poemName = array('Тестовое');
-#$c = $a -> getPoemIdFromPoemName($poemName);
+#$c = $a -> getPoemIdFromPoemText($poemText);
 #print_r($c);

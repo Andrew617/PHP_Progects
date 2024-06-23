@@ -5,7 +5,7 @@
 <img src="/home/andrew/PHP_Progects/stihi/public/images/2311_mainfoto_03.jpg" align="right">  
 <p>
 <?php include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
-include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi';
+include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
 $a = new Controller_user;
 $b = new Controller_stihi;
 $user = $a -> getUserFromId($get['id']);
@@ -14,7 +14,9 @@ $poems = $b -> getAllpoemsFromUser($user['nick']);?>
 Фамилия: <?php echo $user['surname'];?><br><br>
 Биография:<br> <?php echo $user['biography'];?><br><br>
 Профессия: <br><?php echo $user['profession'];?><br><br>
-Произведения: <br> <?php print_r($poems); ?><br><br>
+Произведения: <br><?php foreach ($poems as &$poem) {
+    echo '<a href = "http://stihi?controller=poem&poem_text=',urlencode($poem),' "> ',$poem,'</a>';
+}?><br><br>
 
 
 

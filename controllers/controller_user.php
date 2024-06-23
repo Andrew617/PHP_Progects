@@ -1,6 +1,7 @@
 <?php
 require_once '/home/andrew/PHP_Progects/stihi/model/model_user.php';
-class Controller_user extends Model_user {
+class Controller_user extends Model_user{
+    
     
     private function createPasswordhash($password)
     {
@@ -134,5 +135,5 @@ class Controller_user extends Model_user {
 #$a = new Controller_user;
 #$newUser = array( 'nick' => 'Mikel', 'name' => 'Михаил', 'profession' => 'Поэт', 'biography' => 'Воевал на Кавказе. Пишу стихи, и, реже, прозу.', 'password' => '33W22');
 #$nick = 'Mikel';
-#$b = $a -> getUserIdFromNick($nick);
+#$b = $a -> getAllusersID();
 #print_r($b);

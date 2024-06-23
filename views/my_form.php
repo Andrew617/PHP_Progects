@@ -7,8 +7,7 @@
 <textarea name="word" wrap="hard" rows="50" cols="50">
 </textarea>
 <input type="submit" value="ОПУБЛИКОВАТЬ"></label></head></html></form>
-<?php 
-require_once '/home/andrew/PHP_Progects/stihi/views/exit_form';
+<?php require_once '/home/andrew/PHP_Progects/stihi/views/exit_form.html';
 
 
 
