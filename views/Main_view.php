@@ -16,3 +16,4 @@ foreach ($get_users as $us) {
 <p><a href = "http://stihi?id=new" > зарегистрироваться </a> </p>
 <p><a href = "http://stihi?controller=entry&id=key" > войти</a></p>
 
+

@@ -11,7 +11,6 @@ function rout($get, $url)
     if (empty($get)){
         include_once '/home/andrew/PHP_Progects/stihi/views/Main_view.php';
     }
-    
     else if ($get['controller']=='user' & in_array($get['id'], $getUsers)){
         include_once '/home/andrew/PHP_Progects/stihi/views/user_view.php';
     }
@@ -34,10 +33,9 @@ function rout($get, $url)
     
     else if ($get[controller]=='poem' & !empty($get['poem_text'])){
         $id = $poems -> getPoemIdFromPoemText($get['poem_text']);
-        print_r($id);
         ("Location: http://stihi?controller=poem&poem_id=".$id[0]);
     }
     
-    else header("Location: HTTP/1.1 404 Not Found");
+    #else header("Location: HTTP/1.1 404 Not Found");
 }
 

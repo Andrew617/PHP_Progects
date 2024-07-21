@@ -28,7 +28,7 @@ class Controller_stihi extends Model_stihi {
     
     function wrightPoem($id, $poem_name, $poem_text)
     {
-    $values = array($id, $poem_name, $poem_text);
+    $values = array("id" => $id, "poem_name" => $poem_name, "poem_text" => $poem_text);
     Model_stihi::createNewPoetry($values);
     }
 
@@ -58,8 +58,3 @@ class Controller_stihi extends Model_stihi {
     }
 
 }
-//$poemText = 'В горах моё сердце';
-//$poemId = '1';
-//$a = new Controller_stihi;
-//$b = $a -> getOnePoem($poemId);
-//print_r($b);
