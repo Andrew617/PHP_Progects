@@ -27,7 +27,8 @@ function getAllpoemsId()
 
 function getAllpoemsFromUser($nick)
     {
-    $sqlCommand = "SELECT LEFT(poems.poem_text, 25) FROM passwords LEFT OUTER JOIN poems ON passwords.id = poems.id WHERE nick = ?";
+    $sqlCommand = "SELECT poem_name FROM passwords LEFT OUTER JOIN poems ON passwords.id = poems.id WHERE nick = ?";
+    //$sqlCommand = "SELECT LEFT(poems.poem_text, 25) FROM passwords LEFT OUTER JOIN poems ON passwords.id = poems.id WHERE nick = ?";
     $allpoems = Model::getResult($sqlCommand, $nick);
     return $allpoems;
     }
