@@ -1,6 +1,6 @@
 <!DOCTIPE html>
 <?php session_start();
-setcookie($path = "/foo/");
+setcookie($path = "~/foo/");
 if (!empty($_SESSION['name'])){
 require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
 require_once '/home/andrew/PHP_Progects/stihi/views/template_view.html';

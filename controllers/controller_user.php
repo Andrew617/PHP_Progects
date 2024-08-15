@@ -11,7 +11,7 @@ class Controller_user extends Model_user{
     
    private function createColumnset($biographyUpdateList)
     {
-        $columcs = '';
+        $columns = '';
         foreach (array_keys($biographyUpdateList) as &$column)  {
             $columns.= str_replace("%column%",  $column, "%column%".","." ");
         }
@@ -35,11 +35,12 @@ class Controller_user extends Model_user{
     {
         $data = '';
         foreach ($biographyUpdateList as &$value) {
-            $data.= str_replace("%value%",  $value, "'"."%value%"."'"." ");
-            $dataArr = explode(" ", $data);
+            $data.= str_replace("%value%",  $value, "'"."%value%"."'".","." ");
+            //$dataArr = explode(" ", $data);
         }
-        $newDataset = array_pop($dataArr);
-        $dataSet = implode(",", $dataArr);
+        //$newDataset = array_pop($dataArr);
+        $dataSet = rtrim($data, ",\ ");
+        //$dataSet = implode(",", $dataArr);
         return $dataSet;
     }
           
@@ -97,9 +98,11 @@ class Controller_user extends Model_user{
     
     
     function update($biographyUpdateList, $id) {
+        
         if (isset($biographyUpdateList)) {
+            $idarr = array($id);
             $pdoSet = $this -> createPDOset($biographyUpdateList);
-            Model_user::updateUser($pdoSet, $id);
+            Model_user::updateUser($pdoSet, $idarr);
         }   
     } 
     
@@ -121,6 +124,7 @@ class Controller_user extends Model_user{
 
     function createNewuser($newUser)
     {
+        
         $hash = $this -> createPasswordhash($newUser['password']);
         $newUser['password'] = $hash;
         $newUserWithoutEmpty = array_filter($newUser);
@@ -132,8 +136,3 @@ class Controller_user extends Model_user{
 }
 
 
-#$a = new Controller_user;
-#$newUser = array( 'nick' => 'Mikel', 'name' => 'Михаил', 'profession' => 'Поэт', 'biography' => 'Воевал на Кавказе. Пишу стихи, и, реже, прозу.', 'password' => '33W22');
-#$nick = 'Mikel';
-#$b = $a -> getAllusersID();
-#print_r($b);

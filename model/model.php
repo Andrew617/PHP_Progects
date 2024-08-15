@@ -11,8 +11,11 @@ class Model {
     
     private function create_new_connect() 
     { 
-    try { $dsn = "pgsql:host = {$this -> host}; port=5432; dbname = {$this -> dbname};  user = {$this -> user}; password= {$this -> password}";
-    $dbconn = new PDO ($dsn);
+    try { $dsn = "pgsql:host = {$this -> host}; dbname = {$this -> dbname}";
+    $options = [PDO::ATTR_ERRMODE    => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES   => false,];
+    $dbconn = new PDO ($dsn, $this -> user, $this -> password, $options);
     return $dbconn;
     }
     catch (PDOException $e){
@@ -20,16 +23,18 @@ class Model {
         echo $e -> getMessage();
     }
     }
+   
     
     function getResult($sqlCommand, $values)#возвращает результат параметризованного запроса
     { 
     $connect = $this -> create_new_connect();
     $result = $connect -> prepare($sqlCommand);
     $result -> execute($values);
-    $myData = $result -> fetchAll(PDO::FETCH_ASSOC);
+    $myData = $result -> fetchAll();
     return $myData;
     $connect = null;   
     $result = null;
+    exit;
     }
 
    
@@ -42,6 +47,7 @@ class Model {
     return $usersNick;
     $connect = null;
     $result = null;
+    exit;
     }
     
     function createOrEditEntry($sqlCommand, $values)#Создаёт или редактирует записи в БД
@@ -56,6 +62,4 @@ class Model {
 }
 
 #print_r(PDO::getAvailableDrivers());   
-
-
 

@@ -1,7 +1,6 @@
 <?php 
 session_start();
 if (!empty($_SESSION['name'])){
-require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
 require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
 $id = $_SESSION['name'];
 $newControllerUserObj = new Controller_user;
@@ -11,17 +10,25 @@ $name = $user['name'];
 $biography = $user['biography'];
 $surname = $user['surname'];
 $profession = $user['profession'];?>
-
-<form method="POST"
-        <input type = "text" name="name" size="90" cols="2000" value = <?php echo $name;?>><br><br>
-        <input type = "text" name="surname" size="90" cols="2000" value = <?php echo $surname;?>><br><br>
-        <input type = "text" name="profession" size="90" cols="2000" value = <?php echo $profession;?>><br><br>
-        <textarea wrap = "hard" rows="100" cols="100" name="biography"> <?php echo $biography;?></textarea><br><br>
+<!DOCTIPE html>
+<form method="POST">
+        <textarea wrap = "off" rows="1" cols="100" name="name"><?php echo $name;?></textarea><br><br>
+        <textarea wrap = "off" rows="1" cols="100" name="surname"><?php echo $surname;?></textarea><br><br>
+        <textarea wrap = "off" rows="1" cols="100" name="profession"><?php echo $profession;?></textarea><br><br>
+        <textarea wrap = "hard" rows="10" cols="100" name="biography"><?php echo $biography;?></textarea><br><br>
         <input type="submit" value="ИЗМЕНИТЬ"></form>    
 <p>
 <?php if (!empty($_POST['name']) || !empty($_POST['surname']) || !empty($_POST['profession']) || !empty($_POST['biography']))
     {
-        print_r($_POST);
-        exit;
+        
+        unset($user['nick']);
+        $chengerest = array_diff_assoc($_POST, $user);
+        $chengeredUser = $newControllerUserObj -> update($chengerest, $id);
+        //exit;
     }
-}    
+}
+else
+{
+header("Location: index.php?");
+exit;
+}
