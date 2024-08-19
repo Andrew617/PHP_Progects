@@ -54,9 +54,10 @@ class Model {
     {
         $connect = $this -> create_new_connect();
         $newScript = $connect -> prepare($sqlCommand);
-        $newScript -> execute($values);
+        $result = $newScript -> execute($values);
+        return $result;
         $connect = null;
-        $newScript = null;
+        $newUser = null;
     }
 
 }

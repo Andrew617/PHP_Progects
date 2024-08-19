@@ -9,17 +9,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> СТИХИ </title>
-<script> function enter(){
-const ajax = new XMLHttpRequest();
-ajax.open('GET', 'http://stihi/my_form.php', true);
-ajax.addEventListener('readystatechange', function()
-{
-  if (this.readyState == 4 && this.status == 200)
-  output.innerHTML = this.responseText;
-})
-  ajax.send(); 
-} </script>
-  <input type="button" onclick = "enter()" value = "войти">
 </body>
 <style>
  .a {

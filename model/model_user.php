@@ -45,7 +45,6 @@ class Model_user extends Model {
     function updateUser($pdoSet, $id)
         {   
             $sqlCommand = "UPDATE passwords SET"." ".$pdoSet." "."WHERE id = :id";
-            echo $sqlCommand;
             Model::createOrEditEntry($sqlCommand, $id);
         }                                                        
 

@@ -36,21 +36,39 @@ class Controller_user extends Model_user{
         $data = '';
         foreach ($biographyUpdateList as &$value) {
             $data.= str_replace("%value%",  $value, "'"."%value%"."'".","." ");
-            //$dataArr = explode(" ", $data);
         }
-        //$newDataset = array_pop($dataArr);
         $dataSet = rtrim($data, ",\ ");
-        //$dataSet = implode(",", $dataArr);
         return $dataSet;
     }
           
     
     
    private function createPDOset($biographyUpdateList) {
+        if (count($biographyUpdateList) >1)
+        {
         $columnSet = $this -> createColumnset($biographyUpdateList);
         $dataSet = $this -> createDataset($biographyUpdateList);
-        $PDOset = "(".$columnSet.")"." "."="." "."(".$dataSet.")";
+        $PDOset = "(".$columnSet.")"." "."="." "."(".$dataSet.")"; 
+        }
+        else
+        {
+        $columnSet = $this -> createColumnset($biographyUpdateList);
+        $dataSet = $this -> createDataset($biographyUpdateList);
+        $PDOset = $columnSet." "."="." ".$dataSet;
+        }
+        
        return $PDOset; 
+    }
+    
+    private function exchangeNullFromString($v){
+        //$newV = '';
+        //foreach ($var as &$v){
+            if ($v == '')
+            {   
+            $v = 'Пользователь предпочёл удалить эти сведения';
+            }
+        return $v;
+        //}
     }
     
     function createOneArrayByArrays($arr)
@@ -62,8 +80,8 @@ class Controller_user extends Model_user{
             {
                 $oneArray[] = $column; 
             }
+        return $oneArray;
         }
-    return $oneArray;
     }
 
     function getAllusersID()
@@ -93,18 +111,17 @@ class Controller_user extends Model_user{
         $idarr = array($id);
         $userArr = Model_user::selectUserFromId($idarr);
         $user = array_merge($oneArray, ...$userArr);
-        return $user;
+        $userWithoutNull = array_map('Controller_user::exchangeNullFromString',$user);
+        return $userWithoutNull;
     }
     
     
     function update($biographyUpdateList, $id) {
-        
-        if (isset($biographyUpdateList)) {
             $idarr = array($id);
+            //$chengerestWithoutNull = array_filter($biographyUpdateList);
             $pdoSet = $this -> createPDOset($biographyUpdateList);
             Model_user::updateUser($pdoSet, $idarr);
         }   
-    } 
     
     function getUsers()
     {
@@ -134,5 +151,3 @@ class Controller_user extends Model_user{
     }
 
 }
-
-
