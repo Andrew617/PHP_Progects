@@ -17,7 +17,6 @@ if (empty($_POST))
     else
     {
         $chengerest = array_diff_assoc($_POST, $user);
-        print_r($chengerest);
         $chengeredUser = $newControllerUserObj -> update($chengerest, $id);
         $user = $newControllerUserObj -> getUserFromId($_SESSION['name']);
         $name = $user['name'];

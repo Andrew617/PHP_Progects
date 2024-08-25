@@ -1,10 +1,16 @@
 <?php
 require_once '/home/andrew/PHP_Progects/stihi/model/model_stihi.php';
-require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';
 
-class Controller_stihi extends Model_stihi {
+class Controller_stihi {
 
-    private function createOneArrayByArrays($arr)
+    public $modelStihi;
+    
+   public function __construct()
+    {
+    $this -> modelStihi = new Model_stihi;
+    }
+    
+    private static function createOneArrayByArrays($arr)
     {
         $oneArray = array();
         foreach ($arr as $a)
@@ -20,8 +26,8 @@ class Controller_stihi extends Model_stihi {
     function getOnePoem($poemId)
     {
     $poemIdA = array($poemId);
-    $poem = Model_stihi::selectPoemForId($poemIdA);
-    $poem = $this -> createOneArrayByArrays($poem);
+    $po = $this -> modelStihi -> selectPoemForId($poemIdA);
+    $poem = self::createOneArrayByArrays($po);
     return $poem;
     }
 
@@ -29,32 +35,38 @@ class Controller_stihi extends Model_stihi {
     function wrightPoem($id, $poem_name, $poem_text)
     {
     $values = array("id" => $id, "poem_name" => $poem_name, "poem_text" => $poem_text);
-    Model_stihi::createNewPoetry($values);
+    $this -> modelStihi -> createNewPoetry($values);
     }
 
     function getAllpoemsFromUser($nick)
     {
     $nickArr = array($nick);
-    $poemsFromUser = Model_stihi::getAllpoemsFromUser($nickArr);
-    $AllpoemsFromUser = $this -> createOneArrayByArrays($poemsFromUser);
+    $poemsFromUser = $this -> modelStihi -> getAllpoemsFromUser($nickArr);
+    $AllpoemsFromUser = self::createOneArrayByArrays($poemsFromUser);
     return $AllpoemsFromUser;
     }
 
     function getAllpoemsId()
     {
-    $allPoems = Model_stihi::getAllpoemsId();
-    return $allPoems;
+    $poemsId = $this -> modelStihi -> getAllpoemsId();
+    return $poemsId;
     }
 
-    function getPoemIdFromPoemText($poemText)
+    function getPoemIdFromPoemName($poemName)
     {
-    $poemText = $poemText.'%';
     $array = array();
-    $poemNameArr = array($poemText);
-    $arrayPoemId = Model_stihi::getPoemIdFromPoemText($poemNameArr);
-    $Controller_user = new Controller_user;
-    $arrayId = $Controller_user -> createOneArrayByArrays($arrayPoemId);
+    $poemNameArr = array($poemName);
+    $arrayPoemId = $this -> modelStihi -> getPoemIdFromPoemName($poemNameArr);
+    $arrayId = self::createOneArrayByArrays($arrayPoemId);
     return $arrayId;
     }
 
 }
+//modelObj = new Model_stihi;
+//$a = new Controller_stihi();
+//$nick = 'Тестовое2';
+//$b = $a -> getAllpoemsId();
+//print_r($b);
+//$poemId = $a -> getPoemIdFromPoemName('Тестовая проверка');
+//$stih = $a -> getOnePoem($poemId);
+//print_r($poemId);

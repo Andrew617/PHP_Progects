@@ -1,7 +1,14 @@
 <?php
 require_once '/home/andrew/PHP_Progects/stihi/model/model_user.php';
-class Controller_user extends Model_user{
+class Controller_user 
+{
     
+    public $modelUser;
+
+    public function __construct()
+    {
+        $this -> modelUser = new Model_user;
+    }
     
     private function createPasswordhash($password)
     {
@@ -61,14 +68,11 @@ class Controller_user extends Model_user{
     }
     
     private function exchangeNullFromString($v){
-        //$newV = '';
-        //foreach ($var as &$v){
             if ($v == '')
             {   
             $v = 'Пользователь предпочёл удалить эти сведения';
             }
         return $v;
-        //}
     }
     
     function createOneArrayByArrays($arr)
@@ -86,13 +90,13 @@ class Controller_user extends Model_user{
 
     function getAllusersID()
         {
-        $allId = Model_user::getAllUsersID();
+        $allId = $this -> modelUser -> getAllUsersID();
         return $allId;
         }
     
     function getAllusersNick()
     {
-        $nicks = Model_user::getAllUsersNick();
+        $nicks = $this -> modelUser -> getAllUsersNick();
         return $nicks;
     }
     
@@ -100,7 +104,7 @@ class Controller_user extends Model_user{
     {
         $oneArray = array();
         $nameArr = array($nick);
-        $idarr = Model_user::selectUserFromNick($nameArr);
+        $idarr = $this -> modelUser -> selectUserFromNick($nameArr);
         $id = array_merge($oneArray, ...$idarr);
         return $id;
     }
@@ -109,7 +113,7 @@ class Controller_user extends Model_user{
     {
         $oneArray = array();
         $idarr = array($id);
-        $userArr = Model_user::selectUserFromId($idarr);
+        $userArr = $this -> modelUser -> selectUserFromId($idarr);
         $user = array_merge($oneArray, ...$userArr);
         $userWithoutNull = array_map('Controller_user::exchangeNullFromString',$user);
         return $userWithoutNull;
@@ -118,21 +122,20 @@ class Controller_user extends Model_user{
     
     function update($biographyUpdateList, $id) {
             $idarr = array($id);
-            //$chengerestWithoutNull = array_filter($biographyUpdateList);
             $pdoSet = $this -> createPDOset($biographyUpdateList);
-            Model_user::updateUser($pdoSet, $idarr);
+            $this -> modelUser -> updateUser($pdoSet, $idarr);
         }   
     
     function getUsers()
     {
-    $users = Model_user::get_all_users();
+    $users = $this -> modelUser -> get_all_users();
     return $users;
     }
     
     function entry ($nick, $password) {
         $nickArr = array($nick);
-        $a = Model_user::entry_in_page($nickArr);
-        foreach ($a as $apass){
+        $enter = $this -> modelUser -> entry_in_page($nickArr);
+        foreach ($enter as $apass){
             $hash = $apass['password'];
             $veryfe = password_verify($password, $hash); #возможно есть решение лучше. Но работает
         }
@@ -147,7 +150,7 @@ class Controller_user extends Model_user{
         $newUserWithoutEmpty = array_filter($newUser);
         $columnSet = $this -> createColumnset($newUserWithoutEmpty);
         $placeHoldersString = $this -> getPlaceHoldersString($newUserWithoutEmpty);
-        Model_user::entryNewUser($columnSet, $newUserWithoutEmpty, $placeHoldersString);
+        $this -> modelUser -> entryNewUser($columnSet, $newUserWithoutEmpty, $placeHoldersString);
     }
 
 }

@@ -28,21 +28,20 @@ function getAllpoemsId()
 function getAllpoemsFromUser($nick)
     {
     $sqlCommand = "SELECT poem_name FROM passwords LEFT OUTER JOIN poems ON passwords.id = poems.id WHERE nick = ?";
-    //$sqlCommand = "SELECT LEFT(poems.poem_text, 25) FROM passwords LEFT OUTER JOIN poems ON passwords.id = poems.id WHERE nick = ?";
     $allpoems = Model::getResult($sqlCommand, $nick);
     return $allpoems;
     }
 
-function getPoemIdFromPoemText($poemText)
+function getPoemIdFromPoemName($poemName)
     {
-    $sqlCommand = "SELECT poem_id FROM poems WHERE poem_name LIKE ?";
-    $poemId = Model::getResult($sqlCommand, $poemText);
+    $sqlCommand = "SELECT poem_id FROM poems WHERE poem_name = ?";
+    $poemId = Model::getResult($sqlCommand, $poemName);
     return $poemId;
     }
 
 }
 #$poemText = array('В горах моё сердце%');
-#$a = new Model_stihi;
+//$a = new Model_stihi;
 #$b = $a -> getAllpoemsId();
 #print_r($b);
 #$poemName = array('Тестовое');
