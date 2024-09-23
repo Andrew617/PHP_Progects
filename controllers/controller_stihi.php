@@ -27,6 +27,7 @@ class Controller_stihi {
     {
     $poemIdA = array($poemId);
     $po = $this -> modelStihi -> selectPoemForId($poemIdA);
+    //$poem = json_encode($allpoems, JSON_INVALID_UTF8_SUBSTITUTE);
     $poem = self::createOneArrayByArrays($po);
     return $poem;
     }

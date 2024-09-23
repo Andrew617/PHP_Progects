@@ -20,20 +20,14 @@ require_once '/home/andrew/PHP_Progects/stihi/controllers/controller_stihi.php';
             if (empty($get)){
                 include_once '/home/andrew/PHP_Progects/stihi/views/Main_view.php';
         }
-            else if ($get['controller']=='user'){
-                $usersId = $this -> users -> getAllusersID();  
-                if (in_array($get['id'], $usersId))
-                {
-                include_once '/home/andrew/PHP_Progects/stihi/views/user_view.php';  
-                }
-                else if (isset($get['nick'])){
+            else if ($get['controller']=='user' && !empty($get['id'])){
+                //$usersId = $this -> users -> getAllusersID();  
+                //if (in_array($get['id'], $usersId))
+            include_once '/home/andrew/PHP_Progects/stihi/views/user_view.php';  
+            }   
+            else if (isset($get['nick'])){
                     $id = $this -> users -> getUserIdFromNick($get['nick']);
                     header ("Location: http://stihi?controller=user&id=".$id['id']);
-                }
-                else {
-                
-                header("Location: HTTP/1.1 404 Not Found");
-            }
             }
             else if ($get['controller']=='poem') 
             {

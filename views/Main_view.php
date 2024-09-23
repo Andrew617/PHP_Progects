@@ -12,7 +12,7 @@
 </body>
 <style>
  .a {
-    background-image: url('images/2311_mainfoto_03.jpg');
+    background-image: url('2311_mainfoto_03.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -33,4 +33,3 @@ foreach ($get_users as $us) {
 <p><a href = "http://stihi?controller=entry&id=key" > войти</a></p>
 </body>
 </html>
-

@@ -114,9 +114,15 @@ class Controller_user
         $oneArray = array();
         $idarr = array($id);
         $userArr = $this -> modelUser -> selectUserFromId($idarr);
+        if (empty($userArr)){
+            header("Location: HTTP/1.1 404 Not Found");
+        }
+        else {
         $user = array_merge($oneArray, ...$userArr);
         $userWithoutNull = array_map('Controller_user::exchangeNullFromString',$user);
         return $userWithoutNull;
+        }
+        
     }
     
     
