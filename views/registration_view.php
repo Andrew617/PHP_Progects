@@ -12,7 +12,6 @@
 <p>
 <?php 
     $newUser = $_POST;               
-    
     print_r($newUser);
     if (!empty($newUser)) {
         include_once '/home/andrew/PHP_Progects/stihi/controllers/controller_user.php';

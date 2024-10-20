@@ -91,6 +91,7 @@ class Controller_user
     function getAllusersID()
         {
         $allId = $this -> modelUser -> getAllUsersID();
+        
         return $allId;
         }
     
@@ -150,7 +151,6 @@ class Controller_user
 
     function createNewuser($newUser)
     {
-        
         $hash = $this -> createPasswordhash($newUser['password']);
         $newUser['password'] = $hash;
         $newUserWithoutEmpty = array_filter($newUser);

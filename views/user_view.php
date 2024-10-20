@@ -1,4 +1,4 @@
-<!DOCTIPE html>
+<!DOCTYPE html>
 <head>
 <h3>Пользователь</h3>
 <meta charset="utf-8">
@@ -15,17 +15,33 @@ $poems = $b -> getAllpoemsFromUser($user['nick']);?>
 Фамилия: <?php echo $user['surname'];?><br><br>
 Биография:<br> <?php echo $user['biography'];?><br><br>
 Профессия: <br><?php echo $user['profession'];?><br><br>
-Произведения: <br><?php foreach ($poems as &$poem) {
-    echo '<a href = "http://stihi?controller=poem&poem_text=',urlencode($poem),' "> ',$poem,'</a>';
+Произведения: <br><?php $poemIds = [];
+foreach ($poems as &$poemName) {
+$poemId= $b -> getPoemIdFromPoemName($poemName);
+echo '<a href = "http://stihi?controller=poem&poem_text=',urlencode($poemName),' "> ',$poemName,'</a>';
+array_push($poemIds, $poemId['0']);
 }?><br><br>
  <head>
-<button type = "button" onclick = "sendRequestFromGetMethod()"><?PHP echo $poem;?></button>
-<script src = 'stihi.js'> 
-let path = 'http://stihi';
-let args1 = 'poem_id';
-let args2 = <?PHP echo $poem;?>;
-button.onclick = sendRequestFromGetMethod();
+<FORM>
+<autocomplete="off">
+<script src = 'stihi.js'>
 </script>
- </head>
+<input type = "hidden" id = 'p1' name = 'param1' value = 'poem_id'>
+<lebel for = "selectPoem">Все произведения автора- <?php echo $user['nick'];?></lebel>
+<select id = 'p2' name = 'param2'> 
+<?php foreach ($poems as &$poemName)
+{
+$poemId= $b -> getPoemIdFromPoemName($poemName); 
+echo '<option value=' ,urlencode($poemId['0']),'>', $poemName.' '.$poemId['0']; '</option>';
+}?>
+</select>
+<input type= "button" value="загрузить" onclick = "sendRequestWithParam()"></button>
+</FORM>
+<script>
+let param1 = document.getElementById('p1').value;
+let param2 = document.getElementById('p2').value;
+</script>
+<head>
  <title><?php if ($user['name'] == 'пользователь предпочёл не указывать своё имя'|| $user['name'] == Null) {echo 'autor id'.' '.$get['id'];}
  else {echo $user['name'];}?></title>
+<?php $poemId['0'];?>

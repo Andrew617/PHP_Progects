@@ -20,8 +20,6 @@ echo ' '.$name;?>
     $newPoem = $newControllerStihi -> wrightPoem($id, $_POST['poem_name'], $_POST['poem_text']);     
     exit;
 }
-
-
 }
  
 else {

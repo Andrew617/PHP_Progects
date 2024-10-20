@@ -27,7 +27,6 @@ class Controller_stihi {
     {
     $poemIdA = array($poemId);
     $po = $this -> modelStihi -> selectPoemForId($poemIdA);
-    //$poem = json_encode($allpoems, JSON_INVALID_UTF8_SUBSTITUTE);
     $poem = self::createOneArrayByArrays($po);
     return $poem;
     }
@@ -63,11 +62,3 @@ class Controller_stihi {
     }
 
 }
-//modelObj = new Model_stihi;
-//$a = new Controller_stihi();
-//$nick = 'Тестовое2';
-//$b = $a -> getAllpoemsId();
-//print_r($b);
-//$poemId = $a -> getPoemIdFromPoemName('Тестовая проверка');
-//$stih = $a -> getOnePoem($poemId);
-//print_r($poemId);
